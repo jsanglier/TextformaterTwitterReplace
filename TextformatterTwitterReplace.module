@@ -33,8 +33,8 @@ class TextformatterTwitterReplace extends Textformatter
     public function format(&$str)
     {
         //Convert hashtags to twitter searches in <a> links
-        $str = preg_replace("/#([A-Za-z0-9\/\.]*)/", "<a target=\"_new\" href=\"http://twitter.com/search?q=$1\">#$1</a>", $str);
+        $str = preg_replace("/#([A-Za-z0-9\/\.]*)/", "<a target=\"_new\" href=\"https://twitter.com/search?q=$1\">#$1</a>", $str);
         //Convert attags to twitter profiles in <a> links
-        $str = preg_replace("/@([A-Za-z0-9\/\.]*)/", "<a href=\"http://www.twitter.com/$1\">@$1</a>", $str);
+        $str = preg_replace("/@([A-Za-z0-9\/\.]*)/", "<a href=\"https://www.twitter.com/$1\">@$1</a>", $str);
     }
 }
