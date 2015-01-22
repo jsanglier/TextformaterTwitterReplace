@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * ProcessWire Twitter Replace Textformatter
+ *
+ * Replaces @profile and #searchsomething with links to twitter. Based on a couple of lines of code from Jacob Tomlinson
+ * http://www.jacobtomlinson.co.uk/2014/01/22/convert-tweet-hashtags-at-tags-and-urls-to-links-with-php-and-regular-expressions/
+ *
+ * @copyright Copyright (c) 2015, Joss (https://github.com/jsanglier)
+ */
+
+class TextformatterTwitterReplace extends Textformatter
+{
+    public static function getModuleInfo()
+    {
+        return array(
+            'title'     => 'Twitter Replace',
+            'version'   => 1,
+            'summary'   => "Replaces @profile and #searchsomething with links to twitter.",
+            'author'    => 'Joss',
+        );
+    }
+
+
+
+    /**
+     * Format the input string
+     *
+     * @param string $str The block of text to parse
+     *
+     * The incoming string is replaced with the formatted version of itself.
+     **/
+    public function format(&$str)
+    {
+        //Convert hashtags to twitter searches in <a> links
+        $str = preg_replace("/#([A-Za-z0-9\/\.]*)/", "<a target=\"_new\" href=\"http://twitter.com/search?q=$1\">#$1</a>", $str);
+        //Convert attags to twitter profiles in <a> links
+        $str = preg_replace("/@([A-Za-z0-9\/\.]*)/", "<a href=\"http://www.twitter.com/$1\">@$1</a>", $str);
+    }
+}
